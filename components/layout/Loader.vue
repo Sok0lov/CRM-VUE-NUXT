@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <img src="/loader.svg" alt="loader">
+    <NuxtImg src="/loader.svg" alt="loader" />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style  scoped>
   .wrapper {
     @apply bg-sidebar flex items-center justify-center w-screen h-screen;
   }

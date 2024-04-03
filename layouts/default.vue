@@ -1,6 +1,7 @@
 <template>
-  <section class="side-bar grid">
-    <LayoutSideBar />
+  <LayoutLoader v-if="isLoadingStore.isLoading"/>
+  <section v-else :class="{grid: store.isAuth}" style="min-height: 100vh">
+    <LayoutSideBar v-if="store.isAuth" />
       <div>
         <slot/>
       </div>
@@ -8,8 +9,26 @@
 </template>
 
 <script lang='ts' setup>
+  import {account} from "~/utils/appwrite";
+  import {useAuthStore, useIsLoadingStore} from "~/store/auth.store";
 
-import SideBar from "~/components/layout/SideBar.vue";
+  import SideBar from "~/components/layout/SideBar.vue";
+
+  const isLoadingStore = useIsLoadingStore()
+  const store = useAuthStore()
+  const router = useRouter()
+
+
+  onMounted(async () => {
+    try {
+    const user = await account.get()
+      if(user) store.set(user)
+    } catch(error) {
+        router.push('/login')
+    } finally {
+      isLoadingStore.set(false)
+    }
+  })
 </script>
 
 <style scoped>
@@ -18,8 +37,5 @@ import SideBar from "~/components/layout/SideBar.vue";
   grid-template-columns: 1fr 6fr;
 }
 
-.side-bar {
-  min-height: 100vh;
-}
 
 </style>
