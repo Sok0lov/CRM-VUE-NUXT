@@ -6,7 +6,7 @@
 
       <form>
         <UiInput placeholder='Email' type="email" class="mb-3" v-model='emailRef'/>
-        <UiInput placeholder='Email' type="password" class="mb-3" v-model='passwordRef'/>
+        <UiInput placeholder='Password' type="password" class="mb-3" v-model='passwordRef'/>
         <UiInput placeholder='Name' type="name" class="mb-3" v-model='nameRef'/>
         <div class="flex items-center justify-center gap-5">
           <UiButton type="button" @click="login">Login</UiButton>
